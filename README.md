@@ -34,9 +34,10 @@ Ensure you have the following installed:
 3. **Create a .env file:**
    In the project directory, create a .env file and add your Instahyre credentials and desired job functions:
    ```bash
-   INSTA_EMAIL=your-email@example.com
-   INSTA_PASSWORD=yourpassword
-   DESIRED_OPTIONS=Software Development, Data Science
+   INSTA_EMAIL="your-email@example.com"
+   INSTA_PASSWORD="yourpassword"
+   DESIRED_OPTIONS="Software Development, Data Science"
+   YOE="3"
 
 4. **Run the script:**
    ```bash
