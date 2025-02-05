@@ -40,7 +40,7 @@ Ensure you have the following installed:
 
 4. **Run the script:**
    ```bash
-   python script.py
+   python main.py
 
 ## **🚀 Usage**
 Once the script is running, it will:
