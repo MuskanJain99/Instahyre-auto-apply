@@ -10,6 +10,7 @@ load_dotenv()
 EMAIL = os.getenv("INSTA_EMAIL")
 PASSWORD = os.getenv("INSTA_PASSWORD")
 DESIRED_OPTIONS = os.getenv("DESIRED_OPTIONS").split(',')
+YOE = os.getenv("YOE")
 
 # Initialize WebDriver
 driver = webdriver.Chrome()
@@ -28,12 +29,17 @@ def login():
         driver.quit()
         exit()
 
-# Function to select job functions
-def select_job_functions():
+#Function to navigate to the opportunities page
+def go_to_opportunities():
     try:
         driver.get("https://www.instahyre.com/candidate/opportunities/")
         time.sleep(5)
-        
+    except Exception as e:
+        print("Error navigating to the Opportunities page:", e)
+
+# Function to select job functions
+def select_job_functions():
+    try:
         dropdowns = driver.find_elements(By.CLASS_NAME, "selectize-control")
         job_function_dropdown = dropdowns[1]
         
@@ -52,12 +58,27 @@ def select_job_functions():
             time.sleep(1)
             dropdown_input.send_keys(Keys.ENTER)
             time.sleep(1)
-        
-        # Apply filter
+
+    except Exception as e:
+        print("Error selecting job functions:", e)
+
+#Function to enter Experience (in years)
+def enter_experience():
+    try:
+        experience_input = driver.find_element(By.NAME, "years")  # Locate input by 'name'
+        experience_input.clear()  # Clear any existing value
+        experience_input.send_keys(YOE)  # Enter desired experience value
+        time.sleep(1)
+    except Exception as e:
+        print("Error entering experience:", e)
+
+#Function to apply the filters
+def show_results():
+    try:
         driver.find_element(By.XPATH, "//button[contains(text(),'Show results')]").click()
         time.sleep(5)
     except Exception as e:
-        print("Error selecting job functions:", e)
+        print("Error showing results:", e)
 
 # Function to apply for jobs
 def apply_for_jobs():
@@ -83,7 +104,10 @@ def apply_for_jobs():
 
 # Execute functions
 login()
+go_to_opportunities()
 select_job_functions()
+enter_experience()
+show_results()
 apply_for_jobs()
 
 # Close the browser
