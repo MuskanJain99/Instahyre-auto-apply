@@ -67,13 +67,16 @@ def apply_for_jobs():
             view_buttons[0].click()
             time.sleep(5)
         
+        apply_count = 0  # Counter for the number of applications
+        
         while True:
             try:
                 apply_button = driver.find_element(By.XPATH, "//button[contains(text(),'Apply')]")
                 apply_button.click()
                 time.sleep(5)  # Allow application to process
+                apply_count += 1  # Increment the counter each time apply is clicked
             except Exception:
-                print("No more jobs to apply or error in application process.")
+                print(f"Process complete. Total applications clicked: {apply_count}")
                 break
     except Exception as e:
         print("Error clicking 'View' button:", e)
